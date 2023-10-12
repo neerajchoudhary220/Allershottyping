@@ -1,0 +1,12 @@
+.role-btn{
+    cursor: pointer !important;
+}
+
+#commandData{
+    height: 300px;
+    overflow-y: scroll;
+}
+.modal-body>#command{
+    min-height: 100px;
+    height: fit-content;
+}
