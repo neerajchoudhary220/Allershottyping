@@ -11,11 +11,12 @@ class CommandList extends Model
     protected $connection = "sqlite1";
     protected $table = "commandlist";
 
-    protected $fillable = ['technique_id', 'name', 'command'];
+    protected $fillable = ['technique_id', 'name', 'command','id'];
 
 
     public function technique()
     {
         return $this->belongsTo(Technique::class, 'technique_id');
     }
+    public $timestamps = false;
 }

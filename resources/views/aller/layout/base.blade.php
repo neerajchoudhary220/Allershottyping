@@ -84,9 +84,18 @@
     <script src="{{ asset('assets/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
-
+    <script src="{{asset('assets/js/databl/other/basicAjax.js')}}"></script>
     <script src="{{ asset('assets/js/databl/custom-dt.js' )}}"></script>
-
+    <script src="{{asset('assets/js/databl/custom.js')}}"></script>
+    <script>
+        function ajxsetup(){
+            $.ajaxSetup({
+                headers:{
+                    "X-CSRF-TOKEN":"{{csrf_token()}}"
+                }
+            })
+        }
+    </script>
 
     @stack('internal-js')
 </body>

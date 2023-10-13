@@ -6,13 +6,12 @@ function customDt(selector, uRL, data = {}, columns = [],order_=0) {
         url: uRL,
         data: data,
         beforeSend: function () {
-          // showloader();
+            showloader();
         },
         complete: function () {
-          // hideloader();
+            hideloader();
 
         },
-
 
       },
       columns: columns,

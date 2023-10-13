@@ -88,10 +88,10 @@ class AllerController extends Controller
         foreach ($data as $d) {
             $d->name = $d->name;
             $d->indx = $i;
-            $command = '<div><div class="commands d-none">'.$d->command.'</div>'.Str::limit($d->command, 25, '<b class="text-danger next role-btn modalBtn" title="'.$d->name.'">...</b>').'</div>';
+            $command = '<div><div class="commands d-none">' . $d->command . '</div>' . Str::limit($d->command, 25, '<b class="text-danger next role-btn modalBtn" title="' . $d->name . '">...</b>') . '</div>';
             $d->command = $command;
             $deleteBtn = '<a href=""><button class="btn btn-danger btn-sm px-3">Delete</button></a>';
-            $EditBtn = '<button class="btn btn-success btn-sm px-3 ml-3 EdtBtn" value="'.$d->indx.'" title="'.$d->name.'">Edit</button>';
+            $EditBtn = '<button class="btn btn-success btn-sm px-3 ml-3 EdtBtn" value="' . $d->id . '" title="' . $d->name . '">Edit</button>';
             $d->action = $deleteBtn . $EditBtn;
             $i++;
         }
@@ -102,5 +102,22 @@ class AllerController extends Controller
             'recordsFiltered' => $recordsFiltered,
             "data" => $data,
         ];
+    }
+
+    public function updateCommandlist(Request $request, CommandList $commandList)
+    {
+        if ($request->ajax()) {
+            $data = $request->only(['name','command']);
+            // dd(->first());
+            // $commandList->update($data);
+
+            $chck= CommandList::where('id',$commandList)->update($data);
+
+            return response()->json([
+                'msg'=>"Data has been updated",
+                'status'=>$chck,
+            ]);
+
+        }
     }
 }

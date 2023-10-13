@@ -37,4 +37,5 @@ Route::controller(AllerController::class)->prefix('aller')->group(function(){
     Route::get('list','techniquelist')->name('aller.technique.list');
     Route::get('{technique}/listview','commandView')->name('aller.technique.list.view');
     Route::get('{id}/commandlist','commandlist')->name('aller.commandlist');
+    Route::post('{commandlist}/update','updateCommandlist')->name('aller.comandlist.update');
 });
