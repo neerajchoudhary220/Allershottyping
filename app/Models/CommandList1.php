@@ -13,12 +13,10 @@ class CommandList extends Model
 
     protected $fillable = ['technique_id', 'name', 'command','id'];
 
-    public $timestamps = false;
 
     public function technique()
     {
         return $this->belongsTo(Technique::class, 'technique_id');
     }
-
+    public $timestamps = false;
 }
-

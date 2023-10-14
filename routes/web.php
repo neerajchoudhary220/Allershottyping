@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\aller\AllerController;
 use App\Http\Controllers\HtmlController;
+use App\Http\Controllers\OneSignalController;
 use App\Models\Technique;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +33,16 @@ Route::get('test', function () {
     dd($technique);
 });
 
-Route::controller(AllerController::class)->prefix('aller')->group(function(){
-    Route::get('/','index')->name('aller.commands');
-    Route::get('list','techniquelist')->name('aller.technique.list');
-    Route::get('{technique}/listview','commandView')->name('aller.technique.list.view');
-    Route::get('{id}/commandlist','commandlist')->name('aller.commandlist');
-    Route::post('{commandlist}/update','updateCommandlist')->name('aller.comandlist.update');
+Route::controller(AllerController::class)->prefix('aller')->group(function () {
+    Route::get('/', 'index')->name('aller.commands');
+    Route::get('list', 'techniquelist')->name('aller.technique.list');
+    Route::get('{technique}/listview', 'commandView')->name('aller.technique.list.view');
+    Route::get('{id}/commandlist', 'commandlist')->name('aller.commandlist');
+    Route::post('{commandlist}/update', 'updateCommandlist')->name('aller.comandlist.update');
+    Route::post('create','createTechnique')->name('aller.create');
+    Route::patch('{id}/techniqueupdate','updateTechnique')->name('aller.update');
+});
+
+Route::controller(OneSignalController::class)->prefix('onesignal')->group(function () {
+    Route::get('/', 'index')->name('onesignal');
 });

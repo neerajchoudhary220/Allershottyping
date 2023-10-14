@@ -37,3 +37,7 @@
   @keyframes s7 {
     100% {transform: rotate(1turn)}
   }
+
+  .round-10{
+    border-radius: 10px !important;
+  }

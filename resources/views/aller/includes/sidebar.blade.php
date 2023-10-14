@@ -72,6 +72,16 @@
               </p>
             </a>
           </li>
+
+          <li @class(['nav-item',($activePage =='OneSignal')?'active':''])>
+            <a href="{{route('onesignal')}}" @class(['nav-link',($activePage =='OneSignal')?'active':''])>
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                OneSignal
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
           {{-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>

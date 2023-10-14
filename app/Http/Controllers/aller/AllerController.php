@@ -7,6 +7,7 @@ use App\Models\CommandList;
 use App\Models\Technique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class AllerController extends Controller
 {
@@ -16,6 +17,47 @@ class AllerController extends Controller
     {
         $activePage = "commands";
         return view('aller.commands.index', compact('activePage'));
+    }
+
+    public function createTechnique(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $create = Technique::create([
+                'name' => $request->name,
+                'description' => $request->description,
+            ]);
+            if ($create) {
+                return response()->json([
+                    'msg' => 'Created Successfully'
+                ]);
+            }
+
+
+            return response()->json([
+                'msg' => 'Something is wrong'
+            ]);
+        }
+    }
+
+    public function updateTechnique(Request $request,$id){
+        if($request->ajax()){
+            $update = Technique::where('id',$id)->update([
+                'name'=>$request->name
+            ]);
+
+            if($update){
+                return response()->json([
+                    'msg'=>"Updated successsfully ",
+                    "status"=>$update,
+                ]);
+            }
+
+            return response()->json([
+                'msg'=>'Something is wrong',
+                'status'=>0
+            ]);
+        }
     }
 
     public function techniquelist(Request $request)
@@ -43,7 +85,9 @@ class AllerController extends Controller
             $d->name = $d->name;
             $d->indx = $i;
             $view = route('aller.technique.list.view', $d->id);
-            $d->action = '<a href="' . $view . '"><button class="btn btn-info btn-sm px-3">View</button></a>';
+            $updateUrl = route('aller.update',$d->id);
+            $edtBtn ="<button class='btn btn-success btn-sm px-3 EdtBtn' url='$updateUrl'>Edit</button>";
+            $d->action = '<a href="' . $view . '"><button class="btn btn-info btn-sm px-3 mr-3">View</button></a>'.$edtBtn;
             $i++;
         }
 
@@ -107,17 +151,22 @@ class AllerController extends Controller
     public function updateCommandlist(Request $request, CommandList $commandList)
     {
         if ($request->ajax()) {
-            $data = $request->only(['name','command']);
-            // dd(->first());
-            // $commandList->update($data);
 
-            $chck= CommandList::where('id',$commandList)->update($data);
-
-            return response()->json([
-                'msg'=>"Data has been updated",
-                'status'=>$chck,
+            $update = CommandList::where('id', $commandList)->update([
+                'name' => $request->name,
+                'command' => $request->command,
             ]);
 
+            if ($update) {
+                return response()->json([
+                    'msg' => "Data has been updated",
+                    'status' => $update,
+                ]);
+            }
+            return response()->json([
+                'msg' => "Something is wrong",
+                'status' => 0,
+            ]);
         }
     }
 }

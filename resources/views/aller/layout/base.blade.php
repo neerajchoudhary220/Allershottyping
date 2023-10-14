@@ -5,6 +5,7 @@
 
     <head>
         <!-- Required meta tags -->
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Aller</title>
@@ -13,7 +14,7 @@
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{asset('assets/plugins/fontawesome-free/css/all.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Tempusdominus Bootstrap 4 -->
@@ -23,7 +24,7 @@
         <!-- JQVMap -->
         {{-- <link rel="stylesheet" href="{{asset('assets/plugins/jqvmap/jqvmap.min.css"> --}}
         <!-- Theme style -->
-        <link rel="stylesheet" href="{{asset('assets/dist/css/adminlte.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
         <!-- overlayScrollbars -->
         {{-- <link rel="stylesheet" href="{{asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}"> --}}
         {{-- <!-- Daterange picker -->
@@ -39,10 +40,16 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     @yield('master')
+    {{-- <script src="{{ asset('assets/js/onesignal/OneSignalSDKWorker.js') }}"></script> --}}
+    {{-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> --}}
 
-    <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
 
 
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> --}}
@@ -83,19 +90,27 @@
 
     <script src="{{ asset('assets/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/datatable/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{asset('assets/dist/js/adminlte.js')}}"></script>
-    <script src="{{asset('assets/js/databl/other/basicAjax.js')}}"></script>
-    <script src="{{ asset('assets/js/databl/custom-dt.js' )}}"></script>
-    <script src="{{asset('assets/js/databl/custom.js')}}"></script>
+    <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
+    <script src="{{ asset('assets/js/databl/other/basicAjax.js') }}"></script>
+    <script src="{{ asset('assets/js/databl/custom-dt.js') }}"></script>
+    <script src="{{ asset('assets/js/databl/custom.js') }}"></script>
     <script>
-        function ajxsetup(){
+        function ajxsetup() {
             $.ajaxSetup({
-                headers:{
-                    "X-CSRF-TOKEN":"{{csrf_token()}}"
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
                 }
             })
         }
+
+
+
+
+
+
     </script>
+
+
 
     @stack('internal-js')
 </body>

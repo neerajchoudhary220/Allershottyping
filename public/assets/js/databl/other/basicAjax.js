@@ -20,10 +20,10 @@ function basicAjax(uRL, method = 'post', data = null, beforeSend, success, error
         },
         error: function (err) {
             error(err);
-        },
-        complete:function(res){
-            complete(res);
         }
+        // complete:function(res){
+        //     complete(res);
+        // }
 
     });
 }

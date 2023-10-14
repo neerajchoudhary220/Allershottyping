@@ -82,7 +82,6 @@ $(document).ready(function () {
             $("#commandModal").modal('hide');
             dbTblRefresh();
 
-            console.log(res);
         },
         error=(err)=>{
             hideloader();
