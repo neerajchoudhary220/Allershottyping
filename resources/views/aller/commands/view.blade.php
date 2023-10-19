@@ -9,9 +9,14 @@
             </ol>
         </nav>
     </div>
+    <input type="hidden" value="{{$id}}" id="techniqueID">
     <div class="row">
         <div class="col-xl">
             <div class="card">
+                <div class="card-header text-right p-2">
+                    <button class="btn btn-md btn-info round-10" id="AddNewBtn">Add New
+                        +</button>
+                </div>
                 <div class="custom-loader d-none" id="loader"></div>
                 <div class="card-body table-responsive text-nowrap mt-3">
                     <table class="table table-striped table-hover w-100" id="dt-table">
@@ -58,7 +63,9 @@
                     </div>
                     <div class="row">
                         <div class="col-12 text-right p-3">
-                            <button class="btn btn-info btn-sm d-none"  id="modalUpdateBtn">Save</button>
+                            <button class="btn btn-warning btn-sm d-none"  id="modalUpdateBtn">Update</button>
+                            <button class="btn btn-success btn-sm d-none"  id="modalSaveBtn">Save</button>
+
                         </div>
                     </div>
                 </form>
@@ -73,7 +80,8 @@
     @push('internal-js')
         <script>
             const uRL = `{{ route('aller.commandlist', $id) }}`;
-            let updateUrl = `{{route('aller.comandlist.update','id')}}`;
+            const creatCommandUrl = `{{route('aller.command.create')}}`;
+
         </script>
         <script src="{{ asset('assets/js/databl/commandlist-dt.js') }}"></script>
     @endpush

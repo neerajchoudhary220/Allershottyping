@@ -38,9 +38,11 @@ Route::controller(AllerController::class)->prefix('aller')->group(function () {
     Route::get('list', 'techniquelist')->name('aller.technique.list');
     Route::get('{technique}/listview', 'commandView')->name('aller.technique.list.view');
     Route::get('{id}/commandlist', 'commandlist')->name('aller.commandlist');
-    Route::post('{commandlist}/update', 'updateCommandlist')->name('aller.comandlist.update');
+    Route::post('{id}/update', 'updateCommandlist')->name('aller.comandlist.update');
+    Route::post('command/create','createCommand')->name('aller.command.create');
     Route::post('create','createTechnique')->name('aller.create');
     Route::patch('{id}/techniqueupdate','updateTechnique')->name('aller.update');
+
 });
 
 Route::controller(OneSignalController::class)->prefix('onesignal')->group(function () {

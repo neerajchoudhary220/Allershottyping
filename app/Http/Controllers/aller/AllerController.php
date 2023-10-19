@@ -40,22 +40,23 @@ class AllerController extends Controller
         }
     }
 
-    public function updateTechnique(Request $request,$id){
-        if($request->ajax()){
-            $update = Technique::where('id',$id)->update([
-                'name'=>$request->name
+    public function updateTechnique(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $update = Technique::where('id', $id)->update([
+                'name' => $request->name
             ]);
 
-            if($update){
+            if ($update) {
                 return response()->json([
-                    'msg'=>"Updated successsfully ",
-                    "status"=>$update,
+                    'msg' => "Updated successsfully ",
+                    "status" => $update,
                 ]);
             }
 
             return response()->json([
-                'msg'=>'Something is wrong',
-                'status'=>0
+                'msg' => 'Something is wrong',
+                'status' => 0
             ]);
         }
     }
@@ -85,9 +86,9 @@ class AllerController extends Controller
             $d->name = $d->name;
             $d->indx = $i;
             $view = route('aller.technique.list.view', $d->id);
-            $updateUrl = route('aller.update',$d->id);
-            $edtBtn ="<button class='btn btn-success btn-sm px-3 EdtBtn' url='$updateUrl'>Edit</button>";
-            $d->action = '<a href="' . $view . '"><button class="btn btn-info btn-sm px-3 mr-3">View</button></a>'.$edtBtn;
+            $updateUrl = route('aller.update', $d->id);
+            $edtBtn = "<button class='btn btn-success btn-sm px-3 EdtBtn' url='$updateUrl'>Edit</button>";
+            $d->action = '<a href="' . $view . '"><button class="btn btn-info btn-sm px-3 mr-3">View</button></a>' . $edtBtn;
             $i++;
         }
 
@@ -134,8 +135,9 @@ class AllerController extends Controller
             $d->indx = $i;
             $command = '<div><div class="commands d-none">' . $d->command . '</div>' . Str::limit($d->command, 25, '<b class="text-danger next role-btn modalBtn" title="' . $d->name . '">...</b>') . '</div>';
             $d->command = $command;
+            $updateUrl = route('aller.comandlist.update',$d->id);
             $deleteBtn = '<a href=""><button class="btn btn-danger btn-sm px-3">Delete</button></a>';
-            $EditBtn = '<button class="btn btn-success btn-sm px-3 ml-3 EdtBtn" value="' . $d->id . '" title="' . $d->name . '">Edit</button>';
+            $EditBtn = '<button class="btn btn-success btn-sm px-3 ml-3 EdtBtn" url="'.$updateUrl.'" value="' . $d->id . '" title="' . $d->name . '">Edit</button>';
             $d->action = $deleteBtn . $EditBtn;
             $i++;
         }
@@ -148,14 +150,12 @@ class AllerController extends Controller
         ];
     }
 
-    public function updateCommandlist(Request $request, CommandList $commandList)
+    public function updateCommandlist(Request $request, $id)
     {
         if ($request->ajax()) {
+            // dd($request->all());
 
-            $update = CommandList::where('id', $commandList)->update([
-                'name' => $request->name,
-                'command' => $request->command,
-            ]);
+            $update = CommandList::where('id', $id)->update($request->all());
 
             if ($update) {
                 return response()->json([
@@ -167,6 +167,29 @@ class AllerController extends Controller
                 'msg' => "Something is wrong",
                 'status' => 0,
             ]);
+        }
+    }
+
+    public function createCommand(Request $request)
+    {
+        if ($request->ajax()) {
+            try {
+                DB::beginTransaction();
+
+                $create = CommandList::create($request->all());
+                if($create){
+                    return response()->json([
+                        'msg'=>"New command created successfully ",
+                        'status'=>1
+                    ]);
+                }
+
+                DB::commit();
+            } catch (\Throwable $th) {
+                dd($th);
+                DB::rollBack();
+            }
+
         }
     }
 }
